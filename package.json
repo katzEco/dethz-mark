@@ -12,7 +12,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dethMastery/canvas-watermark"
+    "url": "https://github.com/katzEco/dethz-mark"
   },
   "dependencies": {
     "canvas": "^2.11.2",
