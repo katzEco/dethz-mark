@@ -4,14 +4,13 @@ const yargs = require('yargs')
 const wtm = require('./index')
 
 const opt = yargs
-  .usage("\x1b[32mUsage: 'cMark <Folder Path> -t <Your Title>'\x1b[0m")
+  .usage("\x1b[32mUsage: 'd-mark-it <Folder Path> -t <Your Title>'\x1b[0m")
   .option('title', {
     alias: 't',
     describe: 'Gallery Title',
     type: 'string',
-    demandOption: true
-  })
-  .argv
+    demandOption: true,
+  }).argv
 
 const path = opt._[0]
 const title = opt.t

@@ -1,15 +1,19 @@
 # cam-mark
-![npm](https://img.shields.io/npm/v/cam-mark?style=for-the-badge) ![NPM](https://img.shields.io/npm/l/cam-mark?style=for-the-badge) 
+
+![npm](https://img.shields.io/npm/v/cam-mark?style=for-the-badge) ![NPM](https://img.shields.io/npm/l/cam-mark?style=for-the-badge)
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FdethMastery%2Fcanvas-watermark&countColor=%23263759)<br />
 This is an watermark generator for a bunch of image with a box of theme that you can fully customize!
 
 > This package has got inspiration from [kana2011th/exifmark](https://github.com/kana2011th/exifmark). If you love python, don't forget to check this repository!
 
 ## Table of Content
- - [Usage](#usage)
+
+- [cam-mark](#cam-mark)
+  - [Table of Content](#table-of-content)
+  - [Usage](#usage)
     - [Installation](#installation)
-    - [How to use this tool?](#how-to-use-this)
- - [Configuration](#configuration)
+    - [How to use this tool?](#how-to-use-this-tool)
+  - [Configuration](#configuration)
     - [Frame Theme name](#frame-theme-name)
 
 ---
@@ -17,33 +21,45 @@ This is an watermark generator for a bunch of image with a box of theme that you
 ## Usage
 
 ### Installation
+
 For installation you can use 2 ways
-  1. Cloning this Repository and use global installation like this
-``` zsh
+
+1. Cloning this Repository and use global installation like this
+
+```zsh
 git clone https://github.com/dethMastery/canvas-watermark.git
 ```
+
 and then
+
 ```zsh
 cd canvas-watermark
 yarn global add .
 ```
-  2. Installing through npmjs
+
+2. Installing through npmjs
+
 ```zsh
-yarn global add com-mark
+yarn global add d-mark-it
 ```
 
 ### How to use this tool?
+
 Just run like this
+
 ```zsh
-com-mark <Folder Path> -t <Album Title>
+d-mark-it <Folder Path> -t <Album Title>
 ```
-And now see the result in 
+
+And now see the result in
+
 ```
 <Folder Path>/marked
 ```
 
 ## Configuration
-For configuration part. I used JSON file that can easily help to config this frame. Don't worry if you install this package and don't see config file try to run once or add `camMark.config.json` to your user root folder and add this box of code to your file.
+
+For configuration part. I used JSON file that can easily help to config this frame. Don't worry if you install this package and don't see config file try to run once or add `dMark.config.json` to your user root folder and add this box of code to your file.
 
 ```json
 {
@@ -76,10 +92,11 @@ For configuration part. I used JSON file that can easily help to config this fra
 
 It's okay if you want to change anything but making sure to read theme name in [next section](#frame-theme-name) and some of this reminder :)
 
- - in colors section must be in `HEX`, `html color format` or `rgba`
- - before changing fonts in fonts section PLEASE install font in your computer first and please making sure that font name is same to which is show in your font family
+- in colors section must be in `HEX`, `html color format` or `rgba`
+- before changing fonts in fonts section PLEASE install font in your computer first and please making sure that font name is same to which is show in your font family
 
 ### Frame Theme name
+
   <ol>
     <li>
       <code>frame</code>

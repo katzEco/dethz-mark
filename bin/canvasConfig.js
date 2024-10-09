@@ -5,24 +5,15 @@ const canvasConfig = {
     titleColor: 'whitesmoke',
     modelColor: 'whitesmoke',
     settingColor: 'whitesmoke',
-    watermarkColors: {
-      line1: 'whitesmoke',
-      line2: '#fe6e6f',
-    },
+    watermarkColors: '#fe6e6f',
   },
   fonts: {
     titleFont: 'Sarabun',
     modelFont: 'Sarabun',
     settingsFont: 'Sarabun',
-    waterMarkFonts: {
-      line1: 'Sarabun',
-      line2: 'Sarabun',
-    },
+    waterMarkFonts: 'Sarabun',
   },
-  watermark: {
-    line1: 'dethz',
-    line2: '2018',
-  },
+  watermark: '2018',
 }
 
 module.exports = canvasConfig

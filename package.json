@@ -1,10 +1,12 @@
 {
-  "name": "cam-mark",
-  "version": "1.1.1",
-  "description": "exif watermark generator :x",
+  "name": "d-mark-it",
+  "version": "1.1.2",
+  "description": "exif watermark generator but on my config",
   "main": "./bin/index.js",
   "keywords": [
-    "nodejs", "cli-tools", "watermark"
+    "nodejs",
+    "cli-tools",
+    "watermark"
   ],
   "author": "detzz",
   "license": "MIT",
@@ -15,6 +17,7 @@
   "dependencies": {
     "canvas": "^2.11.2",
     "exif-parser": "^0.1.12",
+    "fractional": "^1.0.0",
     "fs": "^0.0.1-security",
     "os": "^0.1.2",
     "path": "^0.12.7",
@@ -24,6 +27,6 @@
     "dev": "node ./bin/cli.js"
   },
   "bin": {
-    "camMark": "./bin/cli.js"
+    "d-mark-it": "./bin/cli.js"
   }
 }

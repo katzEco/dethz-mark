@@ -2,19 +2,17 @@ const fs = require('fs')
 const os = require('os')
 const path = require('path')
 const ExifParser = require('exif-parser')
+const Fraction = require('fractional').Fraction
 
 const lists = require('./ignored.json').ignored
 const canvasFrame = require('./canvas/Frame')
 const { redBan, logReset } = require('./consoleColor')
 
 const canvasConfig = require('./canvasConfig')
-const canvasMinimal = require('./canvas/Minimal')
-const canvasDetailed = require('./canvas/Detailed')
-const canvasDetailedFrame = require('./canvas/Detailed-Frame')
 
 function mark(folderPath, title) {
   const pattern = /\.(jpg|png|jpeg)$/i
-  const configPath = path.join(os.homedir(), 'camMark.config.json')
+  const configPath = path.join(os.homedir(), 'dMark.config.json')
   let config
 
   if (fs.existsSync(configPath)) {
@@ -37,7 +35,25 @@ function mark(folderPath, title) {
         try {
           const data = fs.readFileSync(path)
           const parser = ExifParser.create(data)
+          parser.enableSimpleValues(true)
           const result = parser.parse()
+
+          // console.log(result.tags)
+
+          const timeZone =
+            result.tags.undefined.split(':').slice(0, -1)[0][0] == '+'
+              ? Number(
+                  result.tags.undefined
+                    .split(':')
+                    .slice(0, -1)[0]
+                    .replace('+', '')
+                )
+              : -Number(
+                  result.tags.undefined
+                    .split(':')
+                    .slice(0, -1)[0]
+                    .replace('-', '')
+                )
 
           let imgResolution
 
@@ -47,38 +63,38 @@ function mark(folderPath, title) {
             imgResolution = [result.imageSize.width, result.imageSize.height]
           }
 
-          const imageLog = `ISO${result.tags.ISO} | f${result.tags.FNumber}`
+          const shutter = `1/${Math.ceil(
+            Math.pow(2, result.tags.ShutterSpeedValue)
+          )}`
+
+          const imageLog = `ISO ${result.tags.ISO}  ${result.tags.FocalLength}mm  ƒ/${result.tags.FNumber}  ${shutter}`
+
+          const dateConst = new Date(result.tags.DateTimeOriginal * 1000)
+
+          let Hour = 0
+
+          if (dateConst.getHours() - timeZone < 0) {
+            Hour = 24 + (dateConst.getHours() - timeZone)
+          } else {
+            Hour = dateConst.getHours() - timeZone
+          }
+
+          const Title = `${title} | ${dateConst.toLocaleDateString()} - ${
+            String(Hour).length < 2 ? `0${Hour}` : Hour
+          }:${
+            String(dateConst.getMinutes()).length < 2
+              ? `0${dateConst.getMinutes()}`
+              : dateConst.getMinutes()
+          }`
 
           const model = [
             result.tags.Model,
-            result.tags.LensModel,
+            result.tags.LensModel.replace('f/', 'ƒ/'),
             imageLog,
-            new Date(result.tags.DateTimeOriginal * 1000).toLocaleDateString() +
-              ' | ' +
-              title,
+            Title,
           ]
 
-          switch (config.theme) {
-            case 'frame':
-              canvasFrame(path, imgResolution, model, config)
-              break
-
-            case 'minimal':
-              canvasMinimal(path, imgResolution, model, config)
-              break
-
-            case 'detailed':
-              canvasDetailed(path, imgResolution, model, config)
-              break
-
-            case 'detailed-frame':
-              canvasDetailedFrame(path, imgResolution, model, config)
-              break
-
-            default:
-              canvasFrame(path, imgResolution, model, config)
-              break
-          }
+          canvasFrame(path, imgResolution, model, config)
         } catch (error) {
           console.log(
             `${redBan}Error reading or parsing the image file${logReset}:`,
