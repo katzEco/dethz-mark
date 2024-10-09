@@ -79,7 +79,7 @@ function mark(folderPath, title) {
             Hour = dateConst.getHours() - timeZone
           }
 
-          const Title = `${title} | ${dateConst.toLocaleDateString()} - ${
+          const date = `${dateConst.toLocaleDateString()} - ${
             String(Hour).length < 2 ? `0${Hour}` : Hour
           }:${
             String(dateConst.getMinutes()).length < 2
@@ -91,7 +91,8 @@ function mark(folderPath, title) {
             result.tags.Model,
             result.tags.LensModel.replace('f/', 'ƒ/'),
             imageLog,
-            Title,
+            title,
+            date,
           ]
 
           canvasFrame(path, imgResolution, model, config)
