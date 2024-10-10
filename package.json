@@ -1,6 +1,6 @@
 {
   "name": "d-mark",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "exif watermark generator but on my config",
   "main": "./bin/index.js",
   "keywords": [

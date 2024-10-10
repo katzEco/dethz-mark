@@ -62,7 +62,7 @@ async function canvasFrame(path, reso, model, config) {
   img.src = `data:image/jpeg;base64,${fs.readFileSync(path).toString('base64')}`
 
   ctx.save()
-  roundedImage(ctx, 50, 50, canvas.width - 100, Number(reso[1]), 20)
+  roundedImage(ctx, 50, 50, reso[0], reso[1], 20)
   ctx.clip()
 
   if (reso[0] < reso[1]) {
