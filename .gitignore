@@ -1,3 +1,7 @@
 /.vscode
 /node_modules
 .DS_Store
+dist
+
+pnpm-lock.yaml
+yarn.lock
