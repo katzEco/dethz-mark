@@ -1,6 +1,6 @@
 const { createCanvas, Image } = require('canvas')
 const fs = require('fs')
-const { greenSuccess, logReset } = require('../consoleColor')
+const { CreateImage } = require('../modules/createFile')
 
 function roundedImage(ctx, x, y, width, height, radius) {
   ctx.beginPath()
@@ -32,11 +32,6 @@ function hexToRgbA(hex) {
 }
 
 async function canvasFrame(path, reso, model, config) {
-  const sptPath = path.split('/').slice(0, -1)
-  const dirPath = sptPath.join('/')
-  const outPath = `${dirPath}/marked`
-  const fileName = `${path.split('/').pop().split('.')[0]}_marked.jpeg`
-
   let canvas = createCanvas(parseInt(reso[0]) + 100, parseInt(reso[1]) + 350)
 
   if (reso[0] < reso[1]) {
@@ -66,9 +61,10 @@ async function canvasFrame(path, reso, model, config) {
   ctx.clip()
 
   if (reso[0] < reso[1]) {
-    ctx.translate(50, reso[1] + 50)
-    ctx.rotate(-(90 * Math.PI) / 180)
-    ctx.drawImage(img, 0, 0)
+    // ctx.translate(50, reso[1] + 50)
+    // ctx.rotate(-(90 * Math.PI) / 180)
+    // ctx.drawImage(img, 0, 0)
+    ctx.drawImage(img, 50, 50)
   } else {
     ctx.drawImage(img, 50, 50)
   }
@@ -128,16 +124,7 @@ async function canvasFrame(path, reso, model, config) {
   ctx.fillText(wtmText2, pos5[0], pos5[1])
 
   const buffer = canvas.toBuffer('image/jpeg')
-  if (!fs.existsSync(outPath)) {
-    fs.mkdirSync(outPath)
-    fs.writeFileSync(`${outPath}/${fileName}`, buffer)
-  } else {
-    fs.writeFileSync(`${outPath}/${fileName}`, buffer)
-  }
-
-  console.log(
-    `${greenSuccess}Added watermarked to ${fileName} successfully!${logReset}`
-  )
+  await CreateImage(path, buffer)
 }
 
 module.exports = canvasFrame
